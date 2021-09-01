@@ -30,14 +30,14 @@ def main():
     train_generator = train_datagen.flow_from_directory(
           "data/train",
           target_size=(64,64),
-          batch_size=10)
+          batch_size=8)
     validation_generator = test_datagen.flow_from_directory(
       "data/validation",
           target_size=(64,64),
           batch_size=10)
-    model.fit_generator(
+    model.fit(
             train_generator,
-            epochs=20,
+            epochs=30,
             steps_per_epoch=10,
             validation_data=validation_generator,
             validation_steps=10)
