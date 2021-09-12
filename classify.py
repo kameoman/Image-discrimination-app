@@ -1,11 +1,14 @@
+import streamlit as st
 import sys
 from PIL import Image
 from keras.models import load_model
 import numpy as np
 
+uploaded_file = st.file_uploader("Choose an image...", type='jpg')
+st.image(uploaded_file)
+
 def main():
-  name = sys.argv[1]
-  image = Image.open(name)
+  image = Image.open(uploaded_file)
   image = image.resize((64, 64))
   # image.show()
   model = load_model("model.h5")
@@ -15,9 +18,9 @@ def main():
   result = model.predict(np_image)
   # print(result)
   if result[0][0] > result[0][1]:
-    print("椎茸")
+    st.write("椎茸")
   else:
-    print("ツキヨタケ")
+    st.write("ツキヨタケ")
 
 
 if __name__ == "__main__":
